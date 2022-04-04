@@ -2,8 +2,8 @@ from django import forms
 from .models import *
 
 class Contact(forms.ModelForm):
-     model = ContactForm
-     class Meta():
+     class Meta:
+          model = ContactForm
           exclude = ['review', 'status']
           labels = {
                'user_name': 'Your Name',
