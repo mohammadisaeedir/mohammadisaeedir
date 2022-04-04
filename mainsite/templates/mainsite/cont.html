@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+    Saeed Mohammadi | {{ detail.user_name }}
+{% endblock title %}
+{% block meta %}
+{% endblock meta %}
+{% block content %}
+    {{ detail.user_name }} <br>
+    {{ detail.email }} <br>
+    {{ detail.subject }} <br>
+    {{ detail.body }} <br>
+{% endblock content %}
