@@ -6,7 +6,7 @@
 {% endblock meta %}
 {% block content %}
     <ul>
-        {% for contact in contacts %}
+        {% for contact in contacts %} {% comment %} "obejct_list" key or context_object_name set in view {% endcomment %}
         <li><a href="{% url 'cont' contact.id %}">{{contact.subject}}</a> | {{ contact.user_name}} | {{contact.email}}</li>
         {% endfor %}
     </ul>

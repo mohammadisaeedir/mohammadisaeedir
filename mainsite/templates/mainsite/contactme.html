@@ -13,7 +13,7 @@
         <div class="popup-content">
             <form method='POST'>
                 {% csrf_token %}
-                {% for field in form %}
+                {% for field in form %}  {% comment %} "form" key in formclass {% endcomment %}
                     {{ field.label_tag }}
                     <br>
                     {{ field }}
