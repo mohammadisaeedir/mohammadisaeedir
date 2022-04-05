@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    Saeed Mohammadi | {{ object.user_name }}
+{% endblock title %}
+{% block meta %}
+{% endblock meta %}
+{% block content %}
+    {{ contactform.user_name }}
+    <br>
+    {% comment %} # model name in lowercase or "object" key {% endcomment %}
+    {{ object.email }}
+    <br>
+    {{ object.subject }}
+    <br>
+    {{ object.body }}
+    <br>
+{% endblock content %}
