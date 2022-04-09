@@ -14,4 +14,14 @@
     <br>
     {{ object.body }}
     <br>
+    <br>
+    {% if is_favorite %}
+    <p>this is favorite one</p>
+    {% else %}
+    <form action="/contacts/favorite" method='POST'>
+        {% csrf_token %}
+        <input type="hidden" name='cont-id' value={{ object.id}}>
+        <button>favorite</button>
+    </form>
+    {% endif %}
 {% endblock content %}
