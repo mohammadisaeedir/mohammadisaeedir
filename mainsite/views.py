@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import Contact
@@ -103,8 +104,23 @@ class DetailContact(DetailView):
     template_name = 'mainsite/cont.html'
     model = cf
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        favorite_id = self.request.session.get('favorite_contact')
+        if favorite_id == str(self.object.id):
+            context['is_favorite'] = True
+        return context
+
 # def detailcontact(request, id):
 #      obj = cf.objects.get(pk=id)
 #      return render(request, 'mainsite/cont.html', {
 #           'detail': obj
 #      })
+
+
+class AddFavorite(View):
+    def post(self, request):
+        cont_id = request.POST['cont-id']
+        # fav_cont = cf.objects.get(pk=cont_id)
+        request.session['favorite_contact'] = cont_id
+        return HttpResponseRedirect('/contacts/' + cont_id)

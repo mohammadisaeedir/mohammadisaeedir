@@ -8,5 +8,6 @@ urlpatterns = [
     path('popup/', views.popup),
     path('contacts', views.Contacts.as_view()),
     # path('contacts/<int:id>', views.detailcontact, name='cont'),
+    path('contacts/favorite', views.AddFavorite.as_view()),
     path('contacts/<int:pk>', views.DetailContact.as_view(), name='cont'),
 ]
