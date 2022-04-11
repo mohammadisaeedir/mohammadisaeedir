@@ -1,7 +1,6 @@
-from distutils.command.upload import upload
+import json
 from django.db import models
-from datetime import date, datetime
-# Create your models here.
+from datetime import date
 
 
 class Options(models.Model):
@@ -27,7 +26,6 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return f'{self.title} | {self.value}'
-
 
     class Meta:
         verbose_name_plural = 'Contact Info'
@@ -56,16 +54,20 @@ class Experience(models.Model):
     company = models.CharField(max_length=100)
     position = models.CharField(max_length=80)
     start_date = models.DateField()
-    # current = models.BooleanField(default=False)
     finish_date = models.DateField(blank=True, null=True)
     body = models.TextField(default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         return f'{self.company} | {self.position}'
 
+    def positions():
+        ls = []
+        positions = Experience.objects.all()
+        for item in positions:
+            ls.append(item.position)
+        return json.dumps(ls)
 
     def duration(self):
         if self.finish_date:
@@ -88,13 +90,13 @@ class Education(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         return f'{self.major} | {self.university}'
 
+
 class Certificate(models.Model):
     title = models.CharField(max_length=100)
-    logo = models.ImageField()
+    logo = models.ImageField(upload_to='images')
     description = models.CharField(max_length=200)
 
     def __str__(self):
@@ -107,6 +109,7 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+
 
 class ContactForm(models.Model):
     user_name = models.CharField(max_length=100)

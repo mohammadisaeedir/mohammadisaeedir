@@ -11,10 +11,14 @@
                     <table>
                         <tbody>
                             <tr>
-                                {% for pr in portfolio|slice:":8" %}
+                                {% for pr in portfolio %}
                                     <td>
                                         <img src="{{ pr.logo.url }}" class="img-responsive" title="{{ pr.title }}">
                                     </td>
+                                    {% if forloop.counter|divisibleby:8 %}
+                                    </tr>
+                                    <tr>
+                                    {% endif %}
                                 {% endfor %}
                             </tr>
                         </tbody>

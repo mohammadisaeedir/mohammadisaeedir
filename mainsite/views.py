@@ -1,14 +1,7 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from .models import *
 from .forms import Contact
-from django.views import View
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView, CreateView
-from django.db.models import Q
-
-# Create your views here.
+from django.views.generic.edit import CreateView
 
 # old way
 #  def contact_me(request):
@@ -63,7 +56,6 @@ class CF(CreateView):
     # this will be automatically save in db
 
 
-
 class MainPage(TemplateView):
     template_name = 'mainsite/mainpage.html'
     context_object_name = 'home_list'
@@ -71,18 +63,21 @@ class MainPage(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = Options.objects.get(pk=1)
-        context['social_network'] = ContactInfo.objects.filter(contact_type='sn')
-        context['at_glance'] = ContactInfo.objects.filter(contact_type='glance')
+        context['social_network'] = ContactInfo.objects.filter(
+            contact_type='sn')
+        context['at_glance'] = ContactInfo.objects.filter(
+            contact_type='glance')
         context['skills'] = SkillCategory.objects.all()
-        context['exprience'] = Experience.objects.all()
+        context['experience'] = Experience.objects.all()
+        context['positions'] = Experience.positions()
         context['education'] = Education.objects.all()
         context['certificate'] = Certificate.objects.all()
         context['portfolio'] = Portfolio.objects.all()
         context['phone'] = ContactInfo.objects.filter(contact_type='phone')[0]
         context['mail'] = ContactInfo.objects.filter(contact_type='mail')[0]
-        context['others'] = ContactInfo.objects.filter(contact_type='others')[0]
+        context['others'] = ContactInfo.objects.filter(
+            contact_type='others')[0]
         return context
-
 
 
 # class SubmitView(View):
@@ -98,42 +93,25 @@ class SubmitView(TemplateView):
         return context
 
 
-# class Contacts(TemplateView):
-#     template_name = 'mainsite/contacts.html'
+# class DetailContact(DetailView):
+#     template_name = 'mainsite/cont.html'
+#     model = ContactForm
 
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
-#         contcats = cf.objects.all()
-#         context["contacts"] = contcats
+#         favorite_id = self.request.session.get('favorite_contact')
+#         if favorite_id == str(self.object.id):
+#             context['is_favorite'] = True
 #         return context
 
-class Contacts(ListView):
-    template_name = 'mainsite/contacts.html'
-    model = ContactForm
 
-    context_object_name = 'contacts'
-
-
-class DetailContact(DetailView):
-    template_name = 'mainsite/cont.html'
-    model = ContactForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        favorite_id = self.request.session.get('favorite_contact')
-        if favorite_id == str(self.object.id):
-            context['is_favorite'] = True
-        return context
+# class AddFavorite(View):
+#     def post(self, request):
+#         cont_id = request.POST['cont-id']
+#         # fav_cont = cf.objects.get(pk=cont_id)
+#         request.session['favorite_contact'] = cont_id
+#         return HttpResponseRedirect('/contacts/' + cont_id)
 
 
-class AddFavorite(View):
-    def post(self, request):
-        cont_id = request.POST['cont-id']
-        # fav_cont = cf.objects.get(pk=cont_id)
-        request.session['favorite_contact'] = cont_id
-        return HttpResponseRedirect('/contacts/' + cont_id)
-
-
-def popup(request):
-    return render(request, 'mainsite/popup.html')
-
+# def popup(request):
+#     return render(request, 'mainsite/popup.html')

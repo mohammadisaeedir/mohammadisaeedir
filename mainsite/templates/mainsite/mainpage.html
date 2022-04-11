@@ -12,10 +12,15 @@
 {% endblock meta %}
 {% block content %}
     <div id="main-wrapper">
+        <div id="preloader">
+            <div id="status">
+                <div class="status-mes"></div>
+            </div>
+        </div>
         {% include 'mainsite/includes/header.html' %}
         {% include 'mainsite/includes/at_glance.html' %}
         {% include 'mainsite/includes/skills.html' %}
-        {% include 'mainsite/includes/expriences.html' %}
+        {% include 'mainsite/includes/experiences.html' %}
         {% include 'mainsite/includes/education.html' %}
         {% include 'mainsite/includes/certificate.html' %}
         {% include 'mainsite/includes/portfolio.html' %}
