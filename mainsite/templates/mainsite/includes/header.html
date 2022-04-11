@@ -1,0 +1,36 @@
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="profile-img">
+                    <img src="{{ header.image.url }}"
+                         class="img-responsive me"
+                         alt="{{ header.main_title }}"/>
+                <a class="btn btn-primary cv_button"
+                   target="_blank"
+                   href="/contactme"
+                   role="button"><i class="fa fa-download"></i> Contact Me
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="name-wrapper">
+            <h1>
+                {{ header.main_title }}
+            </br>
+            <span class="txt-rotate"
+                  data-period="2000"
+                  data-rotate='[ "Product Manager", "Software Analysis", "Project Manager", "Product Leader", "VP of Product" ]'>
+            </span>
+        </h1>
+    </div>
+    <p>
+        {{ header.about_me }}
+    </p>
+    <ul class="social-icon">
+        {% include 'mainsite/includes/social_network.html' %}
+    </ul>
+</div>
+</div>
+</div>
+</header>

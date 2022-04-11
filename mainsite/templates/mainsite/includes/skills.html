@@ -1,0 +1,42 @@
+<section class="section-wrapper skills-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="section-title">
+                    <h2>My Skills</h2>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    {% for sc in skills %}
+                        <div class="col-md-6">
+                            <div class="progress-wrapper">
+                                <h3>{{ sc.title }}</h3>
+                                {% for skill in sc.skills.all%}
+                                <div class="progress-item">
+                                    <span class="progress-title">{{ skill.title }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar"
+                                             role="progressbar"
+                                             aria-valuenow="{{ skill.amount }}"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100"
+                                             style="width: {{skill.amount}}%">
+                                            <span class="progress-percent">{{ skill.amount }}%</span>
+                                        </div>
+                                    </div>
+                                    <!-- /.progress -->
+                                </div>
+                                {% endfor %}
+                                <!-- .skill-progress -->
+                            </div>
+                            <!-- /.progress-wrapper -->
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!--.row -->
+    </div>
+    <!-- .container -->
+</section>

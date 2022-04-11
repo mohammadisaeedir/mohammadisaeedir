@@ -1,0 +1,27 @@
+<section class="section-wrapper portfolio-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="section-title">
+                    <h2>Portfolios</h2>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div style="margin: 0 auto">
+                    <table>
+                        <tbody>
+                            <tr>
+                                {% for pr in portfolio|slice:":8" %}
+                                    <td>
+                                        <img src="{{ pr.logo.url }}" class="img-responsive" title="{{ pr.title }}">
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.row  -->
+    </div>
+</section>

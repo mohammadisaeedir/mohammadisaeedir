@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Saeed Mohammadi | سعید محمدی
+{% endblock title %}
+{% block meta %}
+    <link rel="stylesheet"
+          href="{% static 'mainsite/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mainsite/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mainsite/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'mainsite/css/style.css' %}">
+{% endblock meta %}
+{% block content %}
+    <div id="main-wrapper">
+        {% include 'mainsite/includes/header.html' %}
+        {% include 'mainsite/includes/at_glance.html' %}
+        {% include 'mainsite/includes/skills.html' %}
+        {% include 'mainsite/includes/expriences.html' %}
+        {% include 'mainsite/includes/education.html' %}
+        {% include 'mainsite/includes/certificate.html' %}
+        {% include 'mainsite/includes/portfolio.html' %}
+        {% include 'mainsite/includes/footer.html' %}
+    </div>
+    <!-- jquery -->
+    <script src="{% static 'mainsite/js/jquery-2.1.4.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'mainsite/js/bootstrap.min.js' %}"></script>
+    <!--owl carousal-->
+    <script src="{% static 'mainsite/js/owl.carousel.min.js' %}"></script>
+    <!--theme script-->
+    <script src="{% static 'mainsite/js/scripts.js' %}"></script>
+{% endblock content %}
