@@ -1,14 +1,7 @@
-from audioop import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from .models import *
 from .forms import Contact
-from django.views import View
 from django.views.generic.base import TemplateView
-from .models import ContactForm as cf
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView, CreateView
-
-# Create your views here.
+from django.views.generic.edit import CreateView
 
 # old way
 #  def contact_me(request):
@@ -53,8 +46,8 @@ from django.views.generic.edit import FormView, CreateView
 
 
 # newest2 way based on createview
-class ContactForm(CreateView):
-    model = cf
+class CF(CreateView):
+    model = ContactForm
     form_class = Contact
     # we can even dont use form if we dont need label and errormsg
     # we can use fields and excludes even here like forms.py
@@ -63,12 +56,28 @@ class ContactForm(CreateView):
     # this will be automatically save in db
 
 
-def popup(request):
-    return render(request, 'mainsite/popup.html')
+class MainPage(TemplateView):
+    template_name = 'mainsite/mainpage.html'
+    context_object_name = 'home_list'
 
-
-def index(request):
-    return render(request, 'mainsite/index.html')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = Options.objects.get(pk=1)
+        context['social_network'] = ContactInfo.objects.filter(
+            contact_type='sn')
+        context['at_glance'] = ContactInfo.objects.filter(
+            contact_type='glance')
+        context['skills'] = SkillCategory.objects.all()
+        context['experience'] = Experience.objects.all()
+        context['positions'] = Experience.positions()
+        context['education'] = Education.objects.all()
+        context['certificate'] = Certificate.objects.all()
+        context['portfolio'] = Portfolio.objects.all()
+        context['phone'] = ContactInfo.objects.filter(contact_type='phone')[0]
+        context['mail'] = ContactInfo.objects.filter(contact_type='mail')[0]
+        context['others'] = ContactInfo.objects.filter(
+            contact_type='others')[0]
+        return context
 
 
 # class SubmitView(View):
@@ -84,43 +93,25 @@ class SubmitView(TemplateView):
         return context
 
 
-# class Contacts(TemplateView):
-#     template_name = 'mainsite/contacts.html'
+# class DetailContact(DetailView):
+#     template_name = 'mainsite/cont.html'
+#     model = ContactForm
 
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
-#         contcats = cf.objects.all()
-#         context["contacts"] = contcats
+#         favorite_id = self.request.session.get('favorite_contact')
+#         if favorite_id == str(self.object.id):
+#             context['is_favorite'] = True
 #         return context
 
-class Contacts(ListView):
-    template_name = 'mainsite/contacts.html'
-    model = cf
 
-    context_object_name = 'contacts'
-
-
-class DetailContact(DetailView):
-    template_name = 'mainsite/cont.html'
-    model = cf
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        favorite_id = self.request.session.get('favorite_contact')
-        if favorite_id == str(self.object.id):
-            context['is_favorite'] = True
-        return context
-
-# def detailcontact(request, id):
-#      obj = cf.objects.get(pk=id)
-#      return render(request, 'mainsite/cont.html', {
-#           'detail': obj
-#      })
+# class AddFavorite(View):
+#     def post(self, request):
+#         cont_id = request.POST['cont-id']
+#         # fav_cont = cf.objects.get(pk=cont_id)
+#         request.session['favorite_contact'] = cont_id
+#         return HttpResponseRedirect('/contacts/' + cont_id)
 
 
-class AddFavorite(View):
-    def post(self, request):
-        cont_id = request.POST['cont-id']
-        # fav_cont = cf.objects.get(pk=cont_id)
-        request.session['favorite_contact'] = cont_id
-        return HttpResponseRedirect('/contacts/' + cont_id)
+# def popup(request):
+#     return render(request, 'mainsite/popup.html')

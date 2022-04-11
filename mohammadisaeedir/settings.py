@@ -129,5 +129,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_URL = '/assets/'
 
 # SESSION_COOKIE_AGE = 120 # there is default 2 weeks for that but for change we use this based on seconds (120 == 2 min)

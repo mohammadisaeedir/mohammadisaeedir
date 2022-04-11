@@ -27,7 +27,13 @@ class SkillAdmin(admin.ModelAdmin):
 
 
 class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ('company', 'position', 'start_date', 'finish_date','duration')
+    list_display = ('company', 'position', 'start_date',
+                    'finish_date', 'duration')
+
+
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('level', 'university', 'major', 'start_date',
+                    'finish_date')
 
 
 admin.site.register(ContactForm, ContactFormAdmin)
@@ -35,6 +41,7 @@ admin.site.register(ContactInfo, ContactInfoAdmin)
 admin.site.register(Options, OptionsAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Experience, ExperienceAdmin)
-admin.site.register(Education)
+admin.site.register(Education, EducationAdmin)
 admin.site.register(Certificate)
 admin.site.register(Portfolio)
+admin.site.register(SkillCategory)

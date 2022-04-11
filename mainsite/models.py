@@ -1,14 +1,16 @@
-from secrets import choice
-from turtle import position, title
+import json
 from django.db import models
-
-# Create your models here.
+from datetime import date
 
 
 class Options(models.Model):
     main_title = models.CharField(max_length=100)
     about_me = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images')
+    color = models.CharField(max_length=8, default=None, blank=True)
+
+    def __str__(self):
+        return 'Basic Options'
 
     class Meta:
         verbose_name_plural = 'Basic Options'
@@ -16,36 +18,66 @@ class Options(models.Model):
 
 class ContactInfo(models.Model):
     choice_list = [('sn', 'Social Network'), ('glance', 'Glance'),
-                   ('contact', 'Contact'), ('other', 'Others'), ]
+                   ('mail', 'Email'), ('phone', 'Phone'), ('others', 'Others'), ]
     title = models.CharField(max_length=80)
     fontawesome = models.CharField(blank=True, max_length=100)
     value = models.CharField(max_length=200)
     contact_type = models.CharField(max_length=50, choices=choice_list)
 
+    def __str__(self):
+        return f'{self.title} | {self.value}'
+
     class Meta:
         verbose_name_plural = 'Contact Info'
 
 
+class SkillCategory(models.Model):
+    title = models.CharField(unique=True, max_length=60)
+
+    def __str__(self):
+        return self.title
+
+
 class Skill(models.Model):
-    category = models.CharField(max_length=60)
+    category = models.ForeignKey(
+        SkillCategory, on_delete=models.SET_NULL, null=True, related_name='skills')
     title = models.CharField(max_length=100)
     amount = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.category} | {self.title}'
 
 
 class Experience(models.Model):
     company = models.CharField(max_length=100)
     position = models.CharField(max_length=80)
     start_date = models.DateField()
-    current = models.BooleanField(default=False)
     finish_date = models.DateField(blank=True, null=True)
     body = models.TextField(default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.company} | {self.position}'
+
+    def positions():
+        ls = []
+        positions = Experience.objects.all()
+        for item in positions:
+            ls.append(item.position)
+        return json.dumps(ls)
+
     def duration(self):
-        return self.finish_date - self.start_date
+        if self.finish_date:
+            result = self.finish_date - self.start_date
+        else:
+            result = date.today() - self.start_date
+        years, remain = divmod(result.days, 365)
+        month, days = divmod(remain, 30)
+
+        return f'{years} years, {month} months'
 
 
 class Education(models.Model):
@@ -54,21 +86,30 @@ class Education(models.Model):
     major = models.CharField(max_length=100)
     start_date = models.DateField()
     finish_date = models.DateField()
-    logo = models.ImageField()
+    logo = models.ImageField(upload_to='images')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.major} | {self.university}'
 
 
 class Certificate(models.Model):
     title = models.CharField(max_length=100)
-    logo = models.ImageField()
+    logo = models.ImageField(upload_to='images')
     description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 class Portfolio(models.Model):
     title = models.CharField(max_length=100)
-    logo = models.ImageField()
-    
+    logo = models.ImageField(upload_to='images')
+
+    def __str__(self):
+        return f'{self.title}'
+
 
 class ContactForm(models.Model):
     user_name = models.CharField(max_length=100)
@@ -78,3 +119,6 @@ class ContactForm(models.Model):
     body = models.TextField()
     review = models.TextField(blank=True)
     status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.subject} | {self.user_name}'
