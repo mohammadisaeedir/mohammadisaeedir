@@ -1,6 +1,7 @@
 import json
 from django.db import models
 from datetime import date
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Options(models.Model):
@@ -55,7 +56,7 @@ class Experience(models.Model):
     position = models.CharField(max_length=80)
     start_date = models.DateField()
     finish_date = models.DateField(blank=True, null=True)
-    body = models.TextField(default=None)
+    body = RichTextUploadingField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

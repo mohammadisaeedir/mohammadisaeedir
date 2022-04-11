@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'mainsite',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,21 @@ MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/assets/'
 
 # SESSION_COOKIE_AGE = 120 # there is default 2 weeks for that but for change we use this based on seconds (120 == 2 min)
+
+CKEDITOR_UPLOAD_PATH = "ck/"
+CKEDITOR_CONFIGS = {
+    'default': {
+       'toolbar_Full': [
+            ['Font', 'Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+            ['Link', 'Unlink',],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+            ['Smiley', 'SpecialChar'], ['Source'],
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            ['NumberedList','BulletedList'],
+            ['Indent','Outdent'],
+            ['Maximize'],
+        ],
+        'extraPlugins': 'justify,liststyle,indent',
+   },
+}

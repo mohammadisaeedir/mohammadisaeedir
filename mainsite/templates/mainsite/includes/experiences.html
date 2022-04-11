@@ -17,7 +17,7 @@
                                     Now
                                     {% endif %} | {{ ex.duration }}</small>
                                 <h3>{{ ex.company }} | {{ ex.position }}</h3>
-                                {{ ex.body|linebreaks }}
+                                {{ ex.body|safe }}
                             </div>
                         </div>
                     </div>
