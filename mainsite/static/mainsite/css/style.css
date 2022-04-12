@@ -36,6 +36,10 @@ Author: themehippo.com
 
 ------------------------------------*/
 
+:root {
+    --maincolor: #893ef7;
+}
+
 body {
     font-family: 'Hind', sans-serif;
     font-size: 15px;
@@ -101,7 +105,7 @@ h6 {
  *------------------------------------------*/
 
 a {
-    color: #00b4ff;
+    color: var(--maincolor);
     text-decoration: none;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -120,15 +124,11 @@ a:active {
 a:hover,
 a:focus {
     text-decoration: none;
-    color: #00b4ff;
+    color: var(--maincolor);
 }
 
 p {
     margin-bottom: 20px;
-}
-
-strong {
-    color: #444444;
 }
 
 ul {
@@ -163,7 +163,7 @@ ul {
 /*btn-primary*/
 
 .btn-primary {
-    background-color: #00b4ff;
+    background-color: var(--maincolor);
 }
 
 .btn-primary:hover,
@@ -238,7 +238,7 @@ button:focus,
 .section-title h2 {
     font-size: 14px;
     margin-bottom: 5px;
-    color: #00b4ff;
+    color: var(--maincolor);
     text-transform: uppercase;
 }
 
@@ -265,7 +265,7 @@ button:focus,
     padding: 50px 0;
     margin: 0;
     position: relative;
-    border-top: 5px solid #00b4ff;
+    border-top: 5px solid var(--maincolor);
 }
 
 .header .profile-img {
@@ -285,7 +285,7 @@ button:focus,
 
 .header .name-wrapper span {
     font-size: 24px;
-    color: #00b4ff;
+    color: var(--maincolor);
 }
 
 .header .personal-details {
@@ -419,7 +419,7 @@ button:focus,
 }
 
 .progress-item .progress-bar {
-    background-color: #00b4ff;
+    background-color: var(--maincolor);
     box-shadow: none;
     text-align: right;
 }
@@ -664,7 +664,7 @@ button:focus,
 }
 
 .profile-item a:hover {
-    color: #00b4ff;
+    color: var(--maincolor);
 }
 
 
