@@ -75,8 +75,7 @@ class MainPage(TemplateView):
         context['portfolio'] = Portfolio.objects.all()
         context['phone'] = ContactInfo.objects.filter(contact_type='phone')[0]
         context['mail'] = ContactInfo.objects.filter(contact_type='mail')[0]
-        context['others'] = ContactInfo.objects.filter(
-            contact_type='others')[0]
+        context['others'] = ContactInfo.objects.filter(contact_type='others')[0]
         return context
 
 
@@ -89,7 +88,9 @@ class SubmitView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['body'] = 'we will be in touch'
+        context['body'] = 'We will be in touch'
+        context['social_network'] = ContactInfo.objects.filter(
+            contact_type='sn')
         return context
 
 

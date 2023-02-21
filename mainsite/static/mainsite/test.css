@@ -1,30 +1,70 @@
 body {
-    font-family: arial;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: arial;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .main-site {
-    padding-top: 5px;
-    width: 95%;
-    max-width: 960px;
-    margin: 0 auto;
+  padding-top: 5px;
+  width: 95%;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #popup-1 {
-    display: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    height: 100vh;
-    width: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 100vh;
+  width: 100%;
 }
 
 .popup-content {
-    position: relative;
-    padding: 20px;
-    margin: 0 auto;
-    background-color: white;
-    width: 400px;
-    top: 5vh;
+  position: relative;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: white;
+  width: 260px;
+  top: 23vh;
+}
+
+.logo {
+  padding-top: 5%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  background: none;
+  border: none;
+}
+.popup-content input,
+textarea,
+select {
+  width: 98%;
+}
+
+.popup-content textarea {
+  width: 98%;
+  max-width: 98%;
+  max-height: 120px;
+  min-width: 98%;
+  min-height: 120px;
+}
+
+.popup-content form {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .popup-content {
+    width: 70%;
+  }
+}
+
+.form_title {
+  color: #893ef7;
 }
