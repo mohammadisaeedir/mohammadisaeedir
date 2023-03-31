@@ -1,43 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    Saeed Mohammadi | Contact Me
+Saeed Mohammadi | Contact Me
 {% endblock title %}
 {% block meta %}
-    <link rel="stylesheet"
-          type="text/css"
-          href="{% static 'mainsite/test.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'mainsite/test.css' %}">
+<link rel="stylesheet" href="{% static 'mainsite/css/style.css' %}">
 {% endblock meta %}
 {% block content %}
-    <div id="popup-1">
-        <div class="popup-content">
-            <form method='POST'>
-                {% csrf_token %}
-                {% for field in form %}  {% comment %} "form" key in formclass {% endcomment %}
-                    {{ field.label_tag }}
-                    <br>
-                    {{ field }}
-                    <br>
-                    {{ field.errors }}
-                    <br>
-                {% endfor %}
-                <button>Submit</button> <br>
-                <br>
-                <button id="close-popup-1">Close</button>
-            </form>
-        </div>
+<div id="popup-1">
+    <div class="popup-content">
+        <span class="form_title">How Can I Help You</span>
+        <form method='POST'>
+            <button class="close" id="close-popup-1">x</button>
+            {% csrf_token %}
+            {% for field in form %} {% comment %} "form" key in formclass {% endcomment %}
+            {{ field.label_tag }}
+            <br>
+            {{ field }}
+            {{ field.errors }}
+            <br>
+            {% endfor %}
+            <button class="btn btn-primary cv_button">Submit</button> <br>
+        </form>
     </div>
-    <div class="main-site">
-        <h1>Webpage</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <button id="open-popup-1">Open Popup</button>
-    </div>
-    <script type="text/javascript" src="{% static 'mainsite/js/app.js' %}"></script>
+</div>
+<header class="header-c"></header>
+<div class="main-site">
+    <img class="logo" src="{% static 'files/34.jpg' %}" alt="my logo">
+    <h2>Feel free to leave me a note</h2>
+    <button class="btn btn-primary cv_button" id="open-popup-1">Open Form</button>
+    <br>
+    <h3>or</h3>
+
+    <!-- Zeeg inline embed begins -->
+    <div class="zeeg-inline-widget" id="zeeg-embed-mohammadisaeedir-" style="min-width: 320px; height: 680px"></div>
+    <script type="text/javascript" src="https://assets.zeeg.me/embed.min.js" data-user="mohammadisaeedir"
+        async></script>
+    <!-- Zeeg inline embed ends -->
+
+</div>
+<script type="text/javascript" src="{% static 'mainsite/js/app.js' %}"></script>
 {% endblock content %}

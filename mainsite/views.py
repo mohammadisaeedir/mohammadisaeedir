@@ -2,9 +2,11 @@ from .models import *
 from .forms import Contact
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+# from django.core.mail import send_mail, BadHeaderError
+# from django.http import HttpResponse, HttpRes
 
 # old way
-#  def contact_me(request):
+# def contact_me(request):
 #     if request.method == 'POST':
 #         myform = Contact(request.POST)
 #         if myform.is_valid():
@@ -15,6 +17,11 @@ from django.views.generic.edit import CreateView
 #     return render(request, 'mainsite/contactme.html', {
 #         'form': myform,
 #     })
+    # try:
+    #     send_mail(subject="New Contact form", message="saeed", from_email='sm1988ir@gmail.com', recipient_list=['mohammadisaeedir@gmail.com'])
+    # except BadHeaderError:
+    #     return HttpResponse('Bad Header Request')
+    
 
 # new way based on view model
 # class ContactForm(View):
@@ -56,6 +63,7 @@ class CF(CreateView):
     # this will be automatically save in db
 
 
+
 class MainPage(TemplateView):
     template_name = 'mainsite/mainpage.html'
     context_object_name = 'home_list'
@@ -75,8 +83,7 @@ class MainPage(TemplateView):
         context['portfolio'] = Portfolio.objects.all()
         context['phone'] = ContactInfo.objects.filter(contact_type='phone')[0]
         context['mail'] = ContactInfo.objects.filter(contact_type='mail')[0]
-        context['others'] = ContactInfo.objects.filter(
-            contact_type='others')[0]
+        context['others'] = ContactInfo.objects.filter(contact_type='others')[0]
         return context
 
 
@@ -89,7 +96,9 @@ class SubmitView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['body'] = 'we will be in touch'
+        context['body'] = 'We will be in touch'
+        context['social_network'] = ContactInfo.objects.filter(
+            contact_type='sn')
         return context
 
 
