@@ -2,9 +2,11 @@ from .models import *
 from .forms import Contact
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+# from django.core.mail import send_mail, BadHeaderError
+# from django.http import HttpResponse, HttpRes
 
 # old way
-#  def contact_me(request):
+# def contact_me(request):
 #     if request.method == 'POST':
 #         myform = Contact(request.POST)
 #         if myform.is_valid():
@@ -15,6 +17,11 @@ from django.views.generic.edit import CreateView
 #     return render(request, 'mainsite/contactme.html', {
 #         'form': myform,
 #     })
+    # try:
+    #     send_mail(subject="New Contact form", message="saeed", from_email='sm1988ir@gmail.com', recipient_list=['mohammadisaeedir@gmail.com'])
+    # except BadHeaderError:
+    #     return HttpResponse('Bad Header Request')
+    
 
 # new way based on view model
 # class ContactForm(View):
@@ -54,6 +61,7 @@ class CF(CreateView):
     template_name = 'mainsite/contactme.html'
     success_url = '/thanks'
     # this will be automatically save in db
+
 
 
 class MainPage(TemplateView):

@@ -164,3 +164,5 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': 'justify,liststyle,indent',
    },
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
