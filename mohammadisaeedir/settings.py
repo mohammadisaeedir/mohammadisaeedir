@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-#npmon_j7@k$5k-6we!6nfb9fbujatst!4767&o_jrmh@6ta#^
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -44,7 +42,7 @@ INSTALLED_APPS = [
     'ckeditor',
 ]
 
-X_FRAME_OPTIONS='SAMEORIGIN' # only if django version >= 3.0
+X_FRAME_OPTIONS = 'SAMEORIGIN'  # only if django version >= 3.0
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,44 +76,56 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mohammadisaeedir.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_mysite',
-        'USER': 'dj_admin',
-        'PASSWORD': 'Dj@12344321',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'my_site',
+        'USER': 'root',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT':'5432',
+        'PORT': '3306',
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     #     'NAME': 'db_mysite',
+#     #     'USER': 'dj_admin',
+#     #     'PASSWORD': 'Dj@12344321',
+#     #     'HOST': 'localhost',
+#     #     'PORT':'5432',
+#     # }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -127,7 +137,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -150,19 +159,27 @@ MEDIA_URL = '/assets/'
 CKEDITOR_UPLOAD_PATH = "ck/"
 CKEDITOR_CONFIGS = {
     'default': {
-       'toolbar_Full': [
-            ['Font', 'Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
-            ['Link', 'Unlink',],
+        'toolbar_Full': [
+            [
+                'Font', 'Styles', 'Format', 'Bold', 'Italic', 'Underline',
+                'Strike', 'SpellChecker', 'Undo', 'Redo'
+            ],
+            [
+                'Link',
+                'Unlink',
+            ],
             ['Image', 'Flash', 'Table', 'HorizontalRule'],
             ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], ['Source'],
-            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-            ['NumberedList','BulletedList'],
-            ['Indent','Outdent'],
+            ['Smiley', 'SpecialChar'],
+            ['Source'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['NumberedList', 'BulletedList'],
+            ['Indent', 'Outdent'],
             ['Maximize'],
         ],
-        'extraPlugins': 'justify,liststyle,indent',
-   },
+        'extraPlugins':
+        'justify,liststyle,indent',
+    },
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
